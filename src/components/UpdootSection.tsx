@@ -17,6 +17,9 @@ export const UpdootSection: React.FC<UpdootSectionProps> = ({ post }) => {
         >
             <IconButton
                 onClick={() => {
+                    if (post.voteStatus === 1) {
+                        return;
+                    }
                     vote({
                         postId: post.id,
                         value: 1,
@@ -24,11 +27,15 @@ export const UpdootSection: React.FC<UpdootSectionProps> = ({ post }) => {
                 }}
                 aria-label="Upvote Icon"
                 variant="ghost"
+                colorScheme={post.voteStatus === 1 ? "green" : undefined}
                 icon={<ChevronUpIcon />}
             />
             {post.points}
             <IconButton
                 onClick={() => {
+                    if (post.voteStatus === -1) {
+                        return;
+                    }
                     vote({
                         postId: post.id,
                         value: -1,
@@ -36,6 +43,7 @@ export const UpdootSection: React.FC<UpdootSectionProps> = ({ post }) => {
                 }}
                 aria-label="Downvote Icon"
                 variant="ghost"
+                colorScheme={post.voteStatus === -1 ? "red" : undefined}
                 icon={<ChevronDownIcon />}
             />
         </Flex>
